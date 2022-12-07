@@ -3,7 +3,6 @@ import asyncio
 
 
 async def send_message(message):
-    # отправка обращения в очередь
     connection = await connect("amqp://guest:guest@rabbitmq/")
 
     async with connection:

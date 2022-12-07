@@ -13,14 +13,6 @@ models.Base.metadata.create_all(bind=engine)
 app = fastapi.FastAPI()
 
 
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
-
-
 @app.on_event("startup")
 def start_loop():
     print("starting app")
