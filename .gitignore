@@ -123,8 +123,8 @@ celerybeat.pid
 .env
 .venv
 env/
-rabbitmq/
-data/
+/rabbitmq/
+/data/
 venv/
 ENV/
 env.bak/
