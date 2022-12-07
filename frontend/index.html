@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Отправка обращения</title>
+</head>
+
+<body>
+    <h1>Ваше обращение</h1>
+    <form class="form">
+        <label for="last_name">Фамилия</label><br>
+        <input id="last_name" type="text" name="last_name" value="test_last_name" placeholder="Фамилия" required><br>
+        <label for="name">Имя</label><br>
+        <input id="name" type="text" name="name" placeholder="Имя" value="test_name" required><br>
+        <label for="second_name">Отчество</label><br>
+        <input id="second_name" type="text" name="second_name" value="test_second_name" placeholder="Отчество"><br>
+        <label for="phone_number">Номер телефона</label><br>
+        <input id="phone_number" type="number" name="phone_number" value="88005553535" placeholder="Номер телефона"
+            required><br>
+        <label for="text">Текст обращения</label><br>
+        <textarea name="text" id="text" cols="30" rows="10"></textarea><br>
+        <button id="submit" type="submit">Отправка</button>
+    </form>
+    <script src="func.js"></script>
+</body>
+
+</html>
