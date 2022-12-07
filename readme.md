@@ -48,3 +48,24 @@ rabbitMQ
 Также необходимо настроить rabbitmq так чтобы там был managemen-plugin (в принципе он понадобится для отладки)
 и должен быть доступ в консоль раббита с iprabbitmq:15672
 Img для докера брать на основе debian.
+
+## Запуск проекта
+
+        docker-compose up fastapi --build
+
+HTML страница по адресу:
+
+        localhost:80
+
+Adminer:
+
+        localhost:8080
+
+        login/password: postgres/postgres
+
+rabbitmq:
+
+        localhost:15672
+
+        login/password: guest/guest
+
