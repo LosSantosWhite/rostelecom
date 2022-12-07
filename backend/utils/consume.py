@@ -9,16 +9,17 @@ async def process_message(
 ) -> None:
     async with message.process():
         print(message.body)
+        # запись в бд
         await asyncio.sleep(1)
 
 
 async def consume(loop):
-    connection = await connect_robust("amqp://guest:guest@localhost/", loop=loop)
+    connection = await connect_robust("amqp://guest:guest@rabbitmq/", loop=loop)
     channel = await connection.channel()
     rpc = await RPC.create(channel)
 
     # Register your remote method
-    await rpc.register("process_message", process_message, auto_delete=True)
+    await rpc.register("process_message", process_message)
     queue_name = "appeals"
 
     # Creating channel
@@ -28,7 +29,7 @@ async def consume(loop):
     await channel.set_qos(prefetch_count=100)
 
     # Declaring queue
-    queue = await channel.declare_queue(queue_name, auto_delete=True)
+    queue = await channel.declare_queue(queue_name)
 
     await queue.consume(process_message)
 

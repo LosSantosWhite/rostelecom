@@ -25,3 +25,8 @@ def get_db():
 def start_loop():
     loop = asyncio.get_event_loop()
     asyncio.ensure_future(consume.consume(loop))
+
+
+@app.route("/.../")
+def some():
+    pass

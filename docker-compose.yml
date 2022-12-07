@@ -13,6 +13,8 @@ services:
     ports:
       - 5672:5672
       - 15672:15672
+    networks:
+      - backend
 
   db:
     image: postgres
@@ -25,17 +27,61 @@ services:
       PGDATA: "/var/lib/postgresql/data/pgdata"
     ports:
       - 5432:5432
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "pg_isready",
+          "-q",
+          "-d",
+          "postgres",
+          "-U",
+          "postgres"
+        ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - backend
 
   adminer:
     image: adminer
     restart: always
     ports:
       - 8080:8080
+    networks:
+      - backend
 
   fastapi:
     build: .
-    command: uvicorn backend.fastapi:app
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: postgres
+    networks:
+      - backend
+    depends_on:
+      db:
+        condition: service_healthy
+      tornado:
+        condition: service_started
+      frontend:
+        condition: service_started
+
+  tornado:
+    build:
+      dockerfile: ./docker/tornado.dockerfile
+    ports:
+      - 8000:8000
+    networks:
+      - frontend
+      - backend
+
+  frontend:
+    image: nginx
+    volumes:
+      - ./frontend:/usr/share/nginx/html
+    ports:
+      - 80:80
+    networks:
+      - frontend
+
+networks:
+  frontend:
+  backend:
