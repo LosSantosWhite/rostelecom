@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String
+from sqlalchemy import Column, Integer, String, BigInteger
 
 from servicedb.db import Base
 
@@ -12,5 +12,5 @@ class Appeal(Base):
     second_name = Column(
         String,
     )
-    phone_number = Column(Integer, index=True)
+    phone_number = Column(BigInteger, index=True)
     text = Column(String, index=True)

@@ -3,7 +3,7 @@ from servicedb.models import Appeal
 import json
 
 
-def create_appeal(db: Session, data: json):
+def create_appeal(data, db):
     appeal = Appeal(
         name=data["name"],
         last_name=data["last_name"],
@@ -13,5 +13,3 @@ def create_appeal(db: Session, data: json):
     )
     db.add(appeal)
     db.commit()
-    db.refresh(appeal)
-    return appeal
