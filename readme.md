@@ -51,7 +51,7 @@ Img для докера брать на основе debian.
 
 ## Запуск проекта
 
-        docker-compose up fastapi --build
+        docker-compose up --build
 
 HTML страница по адресу:
 
